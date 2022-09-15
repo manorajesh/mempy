@@ -8,7 +8,7 @@ from hashlib import sha256
 # It is hidden as denoted with
 # the dot at the start.  
 
-def saving_highscore(score):
+def saving_highscore(score, curses_win):
     try:
         file = open(".scores", "r")
     except FileNotFoundError:
@@ -16,11 +16,12 @@ def saving_highscore(score):
 
     try:
         if int(file.read().split()[0]) < score:
-            print("\nNew Highscore!")
+            print("\r\nNew Highscore!")
             file = open(".scores", "w")
             file.write(str(score) + "\n" + str(sha256(str(score).encode()).hexdigest()))
     except (ValueError, IndexError):
-        usrInput = input("Create new .scores file? Will delete file in directory named that (Y/n) ")
+        print("\r\n\nCreate new .scores file? Will delete file in directory named that (Y/n) ")
+        usrInput = curses_win.getkey()
         if usrInput == "" or "Y" or "y":
             file = open(".scores", "w")
             file.write(str(score) + "\n" + str(sha256(str(score).encode()).hexdigest()))
@@ -114,7 +115,7 @@ def game(isHardMode):
                         window.addstr(8+Y_TOP, 0+X_TOP, "Press Space to continue")
                         window.refresh()
                         if window.getkey() == " ":
-                            saving_highscore(score)
+                            saving_highscore(score, window)
     except Exception as e:
         # for curses to reset the terminal
         curses.endwin()
