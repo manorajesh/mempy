@@ -1,6 +1,6 @@
-# Memory Game
+# MemPy
 
-## A simple game to test your memory! Simply type the string of letters you see.
+#### A simple game to test your memory! Simply type the string of letters you see.
 ***
 ![Image of the gameplay](/github/gameplay.png)
 <br>
