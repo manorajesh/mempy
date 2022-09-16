@@ -116,6 +116,10 @@ def game(isHardMode):
                         window.refresh()
                         if window.getkey() == " ":
                             saving_highscore(score, window)
+
+            window.addstr(3+Y_TOP, 0+X_TOP+i*2, "█")
+            window.refresh()
+            sleep(0.1)
     except Exception as e:
         # for curses to reset the terminal
         curses.endwin()
